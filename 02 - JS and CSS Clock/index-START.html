@@ -62,12 +62,42 @@
       background: black;
       position: absolute;
       top: 50%;
+      transform: rotate(90deg);
+      transform-origin: 100%;
+      transition: all 0.05s;
+      transition-timing-function: cubic-bezier(0.1, 1.41, 0.06, 2.31);
     }
 
   </style>
 
   <script>
+  const secondHand = document.querySelector('.second-hand');
+  const hourHand = document.querySelector('.hour-hand');
+  const minHand = document.querySelector('.min-hand');
 
+  // just need to do the same with minutes and hours as you did with seconds
+
+
+  function setDate() {
+    const date = new Date();
+    const seconds = date.getSeconds();
+    const minutes = date.getMinutes();
+    const hours = date.getHours();
+
+    const secondsDegrees = ((seconds / 60) * 360) + 90;
+    const minutesDegrees = ((minutes / 60) * 360) + 90;
+    const hoursDegrees = ((hours / 24) * 360) + 90;
+
+    secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
+    minHand.style.transform = `rotate(${minutesDegrees}deg)`;
+    hourHand.style.transform = `rotate(${hoursDegrees}deg`;
+
+    console.log(seconds);
+    console.log(minutes);
+    console.log(hours);
+  }
+
+  setInterval(setDate, 1000);
 
   </script>
 </body>
